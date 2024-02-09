@@ -51,7 +51,7 @@ func aboutMessage() {
 	fmt.Println("\n2. SPF Record (Sender Policy Framework)")
 	fmt.Println("\tMecanismo de segurança que lista os servidores autorizados a enviar mensagens usando o nome deste domínio.")
 	fmt.Println("\n3. DMARC Record (Domain-based Message Authentication Reporting and Conformance)")
-	fmt.Println("\tInformar os servidores quando uma mensagem não é autenticada, para que tomem a ação apropriada.")
+	fmt.Println("\tElemento que informa os servidores quando uma mensagem não é autenticada, para que tomem a ação apropriada.")
 	fmt.Println("\nDomínios sem estes elementos possuem graves falhas de segurança.")
 }
 
