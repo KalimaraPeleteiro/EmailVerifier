@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"net"
@@ -31,18 +30,6 @@ func main() {
 		checkDomain(domain)
 		os.Exit(0)
 	}
-
-	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Printf("domínio, possuiMX, possuiSPF, spf, possuiDMARC, DMARC\n")
-
-	for scanner.Scan() {
-		checkDomain(scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		log.Fatalf("Erro: %v\n", err.Error())
-	}
-
 }
 
 func helpMessage() {
@@ -55,7 +42,17 @@ func helpMessage() {
 }
 
 func aboutMessage() {
-	fmt.Println("Sobre")
+	fmt.Println("Ferramenta para a verificação de domínios de e-mail.")
+	fmt.Println("")
+	fmt.Println("Como é o processo?")
+	fmt.Println("São avaliados três elementos:")
+	fmt.Println("\n1. MX Record (Mail Exchange)")
+	fmt.Println("\tUm registro DNS que especifica os servidores de e-mail autorizados a receberem e-mails para este domínio.")
+	fmt.Println("\n2. SPF Record (Sender Policy Framework)")
+	fmt.Println("\tMecanismo de segurança que lista os servidores autorizados a enviar mensagens usando o nome deste domínio.")
+	fmt.Println("\n3. DMARC Record (Domain-based Message Authentication Reporting and Conformance)")
+	fmt.Println("\tInformar os servidores quando uma mensagem não é autenticada, para que tomem a ação apropriada.")
+	fmt.Println("\nDomínios sem estes elementos possuem graves falhas de segurança.")
 }
 
 func checkDomain(domain string) {
@@ -141,4 +138,6 @@ func printResults(domain string, hasMX bool, hasSPF bool, hasDMARC bool, spfReco
 	} else {
 		fmt.Println("Domínio não possui DMARC.")
 	}
+
+	fmt.Println("\nPara mais detalhes sobre o que é cada registro, use about.")
 }
